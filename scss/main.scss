@@ -1,0 +1,340 @@
+$font-family-sans-serif: 'Open Sans', sans-serif;
+$primary: #2191c3;
+$secondary: #f6f7f9;
+$dark: #2e3e4e;
+$light: #f3f6f9;
+$black: #000;
+$warning: #f58560;
+$grey :#525863;
+
+body {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+.nav-item .nav-link {
+    font-size: 17px !important;
+    margin-top: 20px !important;
+}
+
+
+#carousel {
+
+    height: 600px;
+    width: 100%;
+    margin-top: 83px;
+
+}
+
+#carousel-indicators {
+    position: absolute;
+    bottom: 30px !important;
+    left: 60% !important;
+}
+
+#carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 90%;
+
+    border: 5px solid white;
+    /* Add border for better visibility */
+}
+
+#carousel-indicators button.active {
+    background-color: orange;
+}
+
+#carousel-inner::after {
+
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+
+}
+
+.carousel-caption {
+    z-index: 10;
+    
+    position: absolute;
+    top: 45% !important; /* Center the caption vertically */
+    left: 50% !important; /* Center the caption horizontally */
+    transform: translate(-50%, -50%);
+    text-align: center; /* Center the text within the caption */
+}
+
+// #carousel-caption .d-flex {
+//     margin-top: 60px !important;
+// }
+
+// #carousel-item {
+//     height: 100vh;
+//     min-height: 300px;
+// }
+
+// #carousel-item #carousel-caption {
+//     bottom: 40%;
+//     z-index: 10;
+// }
+
+//services
+.my-4 .service {
+
+   
+    position:absolute;
+    text-align: center;
+    
+     padding: 6px;
+    // position: absolute;
+    left: 45%;
+    
+    border-radius: 3px;
+    bottom:6px;
+
+}
+
+//testimonials
+#testimonials {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+    text-align: center;
+    border-top: 2px solid #343a40;
+}
+
+.testimonial {
+    max-width: 600px;
+    margin: auto;
+}
+
+.testimonial img {
+    border-radius: 50%;
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+.testimonial h3 {
+    color: #343a40;
+}
+
+.testimonial p {
+    color: #6c757d;
+}
+
+//footer
+.footer i {
+    // position: absolute;
+    bottom: 2px;
+
+}
+
+
+//  about us section
+.hero {
+    background: url(../images/hero.webp) center center/cover no-repeat;
+    width: 100%;
+    height: 500px;
+
+    position: relative;
+
+}
+
+.hero::after {
+
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+
+
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    /* Ensure the content is above the overlay */
+    color: #fff;
+    /* Set the text color to be visible on the overlay */
+}
+
+#border-bottom {
+    border-bottom: 3px solid $dark !important;
+}
+
+//contact
+.contact-banner {
+    margin-top: 82px;
+    position: relative;
+    background: url(../images/bag3.avif) center center/cover no-repeat;
+    height: 500px;
+    /* Adjust the height as needed */
+    opacity: 0.8;
+    /* Set the desired opacity value */
+}
+
+.contact-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    /* Set the text color */
+    z-index: 10 !important;
+    font-weight: 1000 !important;
+
+
+}
+
+.contact-text h1 {
+    font-size: 50px;
+    font-weight: 800;
+    /* Set the font size */
+    margin: 0;
+    color: $secondary;
+}
+
+//contact
+.instagram-icon {
+    color: #833ab4;
+    /* Instagram's purple color */
+    // background: linear-gradient(45deg, #833ab4, #fd1d1d); /* Gradient from purple to pink */
+    background: linear-gradient(45deg, #833ab4, #fd1d1d);
+    /* Gradient from purple to pink */
+    border-radius: 20%;
+
+
+}
+
+//portfolio banner
+.portfolio-banner {
+    margin-top: 82px;
+    position: relative;
+    background: url(../images/bag2.avif) center center/cover no-repeat;
+    height: 500px;
+    /* Adjust the height as needed */
+    // opacity: 0.4; /* Set the desired opacity value */
+
+}
+
+.portfolio-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.portfolio-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    /* Set the text color */
+    z-index: 10 !important;
+    font-weight: 1000 !important;
+
+
+}
+
+.portfolio-text h1 {
+    font-size: 50px;
+    font-weight: 800;
+    /* Set the font size */
+    margin: 0;
+    color: $secondary;
+
+
+}
+
+.form-select {
+    border: none;
+}
+
+.custom-border {
+    border-left: 3px solid $primary !important;
+}
+.carousel-indicators{
+    top: 96% !important;
+}
+
+
+
+//footer
+// .footer {
+//     font-size: 100px !important;
+// }
+//testimonials
+.carousel-indicators button {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 90% !important;
+
+    border: 5px solid $primary !important;
+    /* Add border for better visibility */
+}
+
+.carousel-indicators button.active {
+    background-color: orange !important;
+}
+
+
+//SERVICES
+
+.services-banner {
+    margin-top: 82px;
+    position: relative;
+    background: url(../images/SERVICES.jpg) center center/cover no-repeat;
+    height: 500px;
+    /* Adjust the height as needed */
+    // opacity: 0.4; /* Set the desired opacity value */
+
+}
+
+.services-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.services-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    /* Set the text color */
+    z-index: 10 !important;
+    font-weight: 1000 !important;
+
+
+}
+
+.services-text h1 {
+    font-size: 50px;
+    font-weight: 800;
+    /* Set the font size */
+    margin: 0;
+    color: $secondary;
+
+//service_details
+
+}
+.service_details{
+    margin-top:  86px !important;
+}
+@import '../node_modules/bootstrap/scss/bootstrap.scss'

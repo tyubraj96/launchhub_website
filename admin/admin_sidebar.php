@@ -1,13 +1,13 @@
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<nav class="sidebar sidebar-offcanvas" id="sidebar" style="float:left;">
           <ul class="nav">
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="assets/images/faces/face8.jpg" alt="profile image">
-                  <div class="dot-indicator bg-success"></div>
+                  <!-- <img class="img-xs rounded-circle" src="assets/images/faces/face8.jpg" alt="profile image"> -->
+                  <!-- <div class="dot-indicator bg-success"></div> -->
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">Allen Moreno</p>
+                  <p class="profile-name fs-4 fw-bold"><?php echo $_SESSION["username"]; ?></p>
                   <p class="designation">Premium user</p>
                 </div>
               </a>
@@ -52,7 +52,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/icons/font-awesome.html">
+              <a class="nav-link" href="banner.php">
                 <i class="menu-icon typcn typcn-user-outline"></i>
                 <span class="menu-title">Banner setting</span>
               </a>

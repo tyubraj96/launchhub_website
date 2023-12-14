@@ -1,17 +1,19 @@
 <?php
 include "partials/connect.php";
 // print_r($_POST);
-if (isset($_POST["banner_insert"])) {
-	$status = $_POST["banner_status"];
-	$title =  $_POST["banner_title"];
-	$text =  $_POST["banner_text"];
-	$btn =  $_POST["banner_button"];
-	$btn_link =  $_POST["banner_button_link"];
+if (isset($_POST["service_insert"])) {
+	$status = $_POST["service_status"];
+	$title =  $_POST["service_title"];
+	$text =  $_POST["service_text"];
+	$heading_title =  $_POST["serviceheading_title"];
+         $date = date("d/m/Y");
+         $time = date("h/i/sa");
+	
 
 
 
 	// File upload
-	$target_dir = "images/";
+	$target_dir = "serviceimages/";
 	$target_file = $target_dir . basename($_FILES["file"]["name"]);
 	$uploadOk = 1;
 	// $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -47,7 +49,8 @@ if (isset($_POST["banner_insert"])) {
 	} else {
 		if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
 			// Insert data into the database
-			$sql = "INSERT INTO banner (banner_title, banner_status, image,banner_text,banner_button,banner_button_link) VALUES ('$title', '$status', '$filename','$text','$btn','$btn_link')";
+			$sql = "INSERT INTO services (serviceheading_title, service_image, service_title, service_text,
+                           service_status, date, time) VALUES ('$heading_title', '$filename', '$title', '$text', '$status', '$date', '$time')";
 			echo "$sql";
 			if (mysqli_query($conn, $sql)) {
 				echo "success";
@@ -66,9 +69,9 @@ if (isset($_POST["displaysend"])) {
 <table class="table"  id="banner_table" >
 	<thead>
 		<th>S.No.</th>
-		<th> Banner Title</th>
-		<th> Banner status</th>
-		<th>image</th>
+		<th> Service heading title</th>
+                  <th>Service Status</th>
+		<th>Service Image </th>
 		<th>Action</th>
 
 	</thead>
@@ -76,30 +79,30 @@ if (isset($_POST["displaysend"])) {
 	<tbody>
 
 		<?php
-		$sql = "SELECT * FROM banner ";
+		$sql = "SELECT * FROM services ";
 		$result = mysqli_query($conn, $sql);
 		if (mysqli_num_rows($result) > 0) {
 			while ($row = mysqli_fetch_assoc($result)) {
-				$banner_id = $row['banner_id'];
+				$service_id = $row['service_id'];
 		?>
 				<tr>
-					<td class='id'><?php echo $row['banner_id']; ?></td>
-					<td><?php echo $row['banner_title']; ?></td>
+					<td class='id'><?php echo $row['service_id']; ?></td>
+					<td><?php echo $row['serviceheading_title']; ?></td>
 					<td><?php
-						if ($row['banner_status'] == 1) {
+						if ($row['service_status'] == 1) {
 							echo "show";
 						} else {
 							echo "hide";
 						}
 						?>
 					</td>
-					<td><img src="images/<?php echo $row['image']; ?>" alt="" srcset="" class="banner_img img-fluid" ></td>
+					<td><img src="serviceimages/<?php echo $row['service_image']; ?>" alt="" srcset="" class="banner_img img-fluid" ></td>
 					<td>
 						<div class="d-flex gap-3">
-							<button class="btn btn-primary" onclick="viewbanner('<?php echo $banner_id; ?>')"><i class='fa fa-eye fa-1x'></i></button>
-							<button class="btn btn-primary" onclick="updatevalue('<?php echo $banner_id; ?>')" data-bs-target="#myModalvalues" ><i class='fa fa-pen-to-square fa-1x'></i></button>
-							<button class="btn btn-primary" onclick="viewimagebanner('<?php echo $banner_id; ?>')"><i class='fa fa-camera fa-1x'></i></button>
-							<button class="btn btn-primary" onclick="ViewStatus('<?php echo $banner_id; ?>')"><i class='fa fa-trash fa-1x'></i></button>
+							<button class="btn btn-primary" onclick="viewservice('<?php echo $service_id; ?>')"><i class='fa fa-eye fa-1x'></i></button>
+							<button class="btn btn-primary" onclick="updateServicevalue('<?php echo $service_id; ?>')" data-bs-target="#myModalvalues" ><i class='fa fa-pen-to-square fa-1x'></i></button>
+							<button class="btn btn-primary" onclick="viewServicesbanner('<?php echo $service_id; ?>')"><i class='fa fa-camera fa-1x'></i></button>
+							<button class="btn btn-primary" onclick="ViewStatus('<?php echo $service_id; ?>')"><i class='fa fa-trash fa-1x'></i></button>
 						</div>
 					</td>
 
@@ -112,72 +115,63 @@ if (isset($_POST["displaysend"])) {
 	</tbody>
 </table>
 	<?php
-} else if (isset($_POST['action']) && $_POST['action'] == 'ViewData') {
-	$banner_id = $_POST['banner_id'];
-	// echo "$banner_id";
-	$sql = "SELECT * FROM banner WHERE banner_id = '$banner_id'";
+} else if (isset($_POST['action']) && $_POST['action'] == 'ViewServices') {
+	$service_id = $_POST['service_id'];
+	echo "$service_id";
+	$sql = "SELECT * FROM services WHERE service_id = $service_id";
+         echo "$sql";
 	$result = mysqli_query($conn, $sql);
 	if (mysqli_num_rows($result) > 0) {
 		while ($row = mysqli_fetch_assoc($result)) {
 	?>
 
 
-			<form id="submit_form" method="post" enctype="multipart/form-data">
-				<input type="hidden" id="form_mode" name="form_mode" value="view">
+			<!-- <form id="submit_form" method="post" enctype="multipart/form-data"> -->
 				<div class="mb-3 d-flex gap-4">
-					<label for="banner_title" class="form-label"> Banner Title:</label>
-					<span><?php echo $row['banner_title']; ?></span>
-					<!-- <input type="text" class="form-control" id="banner_title" aria-describedby="emailHelp" name="banner_title" <?php echo ($_POST['form_mode'] === 'view') ? 'disabled' : ''; ?> value="<?php echo $row['banner_title']; ?>"> -->
+					<label for="banner_title" class="form-label"> Service Heading Title:</label>
+					<span><?php echo $row['serviceheading_title']; ?></span>
+					
 				</div>
 
 
 
 				</div>
 				<div class="mb-3 d-flex gap-4">
-					<label for="banner_text" class="form-label"> Banner Text:</label>
-					<span><?php echo $row['banner_text']; ?></span>
+					<label for="banner_text" class="form-label"> Service Title:</label>
+					<span><?php echo $row['service_title']; ?></span>
 					
 
 
 				</div>
 				<div class="mb-3 d-flex gap-4">
-					<label for="banner_button" class="form-label">Banner Button:</label>
-					<span><?php echo $row['banner_button']; ?></span>
-					
-
-
-				</div>
-				<div class="mb-3 d-flex gap-4">
-					<label for="banner_text d-flex gap-4" class="form-label">Banner Button link:</label>
-					<span><?php echo $row['banner_button_link']; ?></span>
-					
-					<input type="hidden" name="banner_insert">
-
-
-				</div>
-				<div class="mb-3 d-flex gap-4">
-					<label for="banner_text d-flex gap-4" class="form-label">Images</label>
-					
-					<img src="images/<?php echo $row['image'] ?> " alt="" srcset=""  style="width:500px; height :auto;">
-					
+					<label for="banner_button" class="form-label">Service Text:</label>
+					<span><?php echo $row['service_text']; ?></span>
+                                             <input type="hidden" name="service_insert">
 					
 
 
 				</div>
 				
+				<div class="mb-3 d-flex gap-4">
+					<label for="banner_text d-flex gap-4" class="form-label">Service Images</label>
+					
+					<img src="images/<?php echo $row['service_image'] ?> " alt="" srcset="" class="img-fluid">
+					
+				</div>
+				
 
 				
 				
-			</form>
+			<!-- </form> -->
 
 
 		<?php
 		}
 	}
-} else if (isset($_POST['action']) && $_POST['action'] == 'updatebannervalue') {
-	$banner_id = $_POST['updatevalue_id'];
+} else if (isset($_POST['action']) && $_POST['action'] == 'updateServicevalue') {
+	$service_id = $_POST['service_id'];
 	// echo "$banner_id";
-	$sql = "SELECT * FROM banner WHERE banner_id = '$banner_id'";
+	$sql = "SELECT * FROM services WHERE service_id = '$service_id'";
 	$result = mysqli_query($conn, $sql);
 	if (mysqli_num_rows($result) > 0) {
 		while ($row = mysqli_fetch_assoc($result)) {
@@ -185,32 +179,26 @@ if (isset($_POST["displaysend"])) {
 
 			<form id="submit_form_" method="post" enctype="multipart/form-data">
 				<div class="mb-3">
-					<label for="banner_title" class="form-label"> Banner Title</label>
-					<input type="text" class="form-control" id="banner_title" aria-describedby="emailHelp" name="banner_title" value="<?php echo $row['banner_title']; ?>">
+					<label for="banner_title" class="form-label"> Serviceheading Title</label>
+					<input type="text" class="form-control" id="serviceheading_title" aria-describedby="emailHelp" name="serviceheading_title" value="<?php echo $row['serviceheading_title']; ?>">
 					<input type="hidden" name="insert_updatevalue">
-					<input type="hidden" name="banner_id" value="<?php echo $row['banner_id']; ?>">
+					<input type="hidden" name="service_id" value="<?php echo $row['service_id']; ?>">
 
 
 				</div>
 				<div class="mb-3">
-					<label for="banner_text" class="form-label"> Banner Text</label>
-					<input type="text" class="form-control" id="banner_text" aria-describedby="emailHelp" name="banner_text" value="<?php echo $row['banner_text']; ?>">
+					<label for="banner_text" class="form-label">Service Text</label>
+					<input type="text" class="form-control" id="banner_text" aria-describedby="emailHelp" name="service_text" value="<?php echo $row['service_text']; ?>">
 
 
 				</div>
 				<div class="mb-3">
-					<label for="banner_button" class="form-label">Banner Button</label>
-					<input type="text" class="form-control" id="banner_button" aria-describedby="emailHelp" name="banner_button" value="<?php echo $row['banner_button']; ?>">
+					<label for="banner_button" class="form-label">service title</label>
+					<input type="text" class="form-control" id="banner_button" aria-describedby="emailHelp" name="service_title" value="<?php echo $row['service_title']; ?>">
 
 
 				</div>
-				<div class="mb-3">
-					<label for="banner_text" class="form-label">Banner Button link</label>
-					<input type="text" class="form-control" id="banner_button_link" aria-describedby="emailHelp" name="banner_button_link" value="<?php echo $row['banner_button_link']; ?>">
-					<!-- <input type="hidden" name="banner_update" > -->
-
-
-				</div>
+				
 				<div class="mb-3">
 
 					<!-- <select class="form-select" aria-label="Default select example" name="banner_status" > -->
@@ -231,15 +219,17 @@ if (isset($_POST["displaysend"])) {
 	<?php
 		}
 	}
-} else if (isset($_POST["insert_updatevalue"])) {
-	$id = $_POST["banner_id"];
-	$title =  $_POST["banner_title"];
-	$text =  $_POST["banner_text"];
-	$btn =  $_POST["banner_button"];
-	$btn_link =  $_POST["banner_button_link"];
+}else if (isset($_POST["insert_updatevalue"])) {
+	$id = $_POST["service_id"];
+	$headingtitle =  $_POST["serviceheading_title"];
+	$text =  $_POST["service_text"];
+	$title =  $_POST["service_title"];
+         $date = date("d/m/Y");
+         $time = date("h/i/sa");
+	
 
-	$sql = "UPDATE  banner  set  banner_title ='$title', banner_text = '$text' ,banner_button = '$btn' , banner_button_link = '$btn_link' WHERE banner_id =$id";
-	echo " $sql";
+	$sql = "UPDATE  services  set  serviceheading_title ='$headingtitle', service_text = '$text' ,service_title = '$title' , date ='$date', time = '$time'  WHERE service_id =$id";
+	echo  $sql;
 	$result = mysqli_query($conn, $sql);
 	// if($result){
 	//      echo "success";
@@ -251,10 +241,10 @@ if (isset($_POST["displaysend"])) {
 
 
 }
-if (isset($_POST['action']) && $_POST['action'] == 'updatebanner') {
-	$id = $_POST['bannerid'];
+if (isset($_POST['action']) && $_POST['action'] == 'viewService') {
+	$id = $_POST['serviceid'];
 
-	$sql = "SELECT * from banner where banner_id = $id";
+	$sql = "SELECT * from services where service_id = $id";
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
 	?>
@@ -268,7 +258,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'updatebanner') {
 						<label class="fw-bold fs-5 fw-semibold">Select New Image</label>
 						<input type="file" name="file" id="upload_file" />
 						<input type="hidden" name="insert_updateimage">
-						<input type="hidden" name="id" value="<?php echo $row['banner_id']; ?>">
+						<input type="hidden" name="id" value="<?php echo $row['service_id']; ?>">
 					</div>
 					<div class="form-group mb-3">
 
@@ -281,7 +271,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'updatebanner') {
 			<div class="col-lg-6">
 				<h3 class="center fw-bold mb-5 text-primary">PREVIOUS IMAGE</h3>
 
-				<img src="images/<?php echo $row['image']; ?>" alt="" srcset="" class="img-fluid">
+				<img src="serviceimages/<?php echo $row['service_image']; ?>" alt="" srcset="" class="img-fluid">
 			</div>
 
 		</div>
@@ -328,8 +318,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'updatebanner') {
 	} else {
 		if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
 			// update data into the database
-			$sql = "UPDATE  banner SET  image = '$filename' WHERE banner_id = $id ";
-			echo "$sql";
+			$sql = "UPDATE  services SET  service_image = '$filename' WHERE service_id = $id ";
+			echo $sql;
 			if (mysqli_query($conn, $sql)) {
 				echo "success";
 			} else {
@@ -344,18 +334,18 @@ else if (isset($_POST['action']) && $_POST['action'] == 'ViewStatus') {
 	$id=$_POST['banner_id'];
 	// echo "$id";
 	// Fetch the current banner_status value
-	$sql = "SELECT banner_status FROM banner WHERE banner_id = $id";
+	$sql = "SELECT service_status FROM services WHERE service_id = $id";
 	$Result1 = mysqli_query($conn, $sql);
  
 	if ($Result1) {
 	    $Row1 = mysqli_fetch_assoc($Result1);
-	    $currentStatus = $Row1['banner_status'];
+	    $currentStatus = $Row1['service_status'];
  
 	    // Toggle the status between 0 and 1
 	    $newStatus = ($currentStatus == 1) ? 0 : 1;
  
 	    // Update the banner_status
-	    $sql2 = "UPDATE banner SET banner_status = $newStatus WHERE banner_id = $id";
+	    $sql2 = "UPDATE services SET service_status = $newStatus WHERE service_id = $id";
 	    $Result2 = mysqli_query($conn, $sql2);
  
 	    if ($Result2) {

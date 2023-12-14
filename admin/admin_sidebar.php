@@ -46,7 +46,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/icons/font-awesome.html">
+              <a class="nav-link" href="about.php">
                 <i class="menu-icon typcn typcn-user-outline"></i>
                 <span class="menu-title">About</span>
               </a>
@@ -64,7 +64,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/icons/font-awesome.html">
+              <a class="nav-link" href="services.php">
                 <i class="menu-icon typcn typcn-user-outline"></i>
                 <span class="menu-title">Services setting</span>
               </a>

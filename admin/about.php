@@ -5,8 +5,7 @@ include "admin_sidebar.php";
 ?>
 
 <div id="admin-content" style=" margin-top:66px; margin-left: 271px;">
-     <div id="error_message"></div>
-     <div id="success_message"></div>
+    
      <div class="container">
           <div class="row">
                <div class="col-md-10">
@@ -40,33 +39,47 @@ include "admin_sidebar.php";
 
                                    <form id="submit_form" method="post" enctype="multipart/form-data">
                                         <div class="mb-3">
-                                             <label for="banner_title" class="form-label"> Banner Title</label>
-                                             <input type="text" class="form-control" id="banner_title" aria-describedby="emailHelp" name="banner_title" required>
+                                             <label for="about_heading" class="form-label"> About Heading</label>
+                                             <input type="text" class="form-control" id="about_heading" aria-describedby="emailHelp" name="about_heading" required>
 
 
                                         </div>
                                         <div class="mb-3">
-                                             <label for="banner_text" class="form-label"> Banner Text</label>
-                                             <input type="text" class="form-control" id="banner_text" aria-describedby="emailHelp" name="banner_text" required>
+                                             <label for="about_text" class="form-label"> About Text</label>
+                                             <input type="text" class="form-control" id="about_text" aria-describedby="emailHelp" name="about_text" required>
 
 
                                         </div>
                                         <div class="mb-3">
-                                             <label for="banner_button" class="form-label">Banner Button</label>
-                                             <input type="text" class="form-control" id="banner_button" aria-describedby="emailHelp" name="banner_button" required>
+                                             <label for="team_position" class="form-label">Team position</label>
+                                             <input type="text" class="form-control" id="team_position" aria-describedby="emailHelp" name="team_position" required>
 
 
                                         </div>
                                         <div class="mb-3">
-                                             <label for="banner_text" class="form-label">Banner Button link</label>
-                                             <input type="text" class="form-control" id="banner_button_link" aria-describedby="emailHelp" name="banner_button_link">
-                                             <input type="hidden" name="banner_insert" required>
+                                             <label for="team_name" class="form-label">Team name</label>
+                                             <input type="text" class="form-control" id="team_name" aria-describedby="emailHelp" name="team_name">
+                                             <input type="hidden" name="about_insert" required>
 
 
                                         </div>
                                         <div class="mb-3">
+                                             <label for="team_name" class="form-label">Team email</label>
+                                             <input type="text" class="form-control" id="team_name" aria-describedby="emailHelp" name="team_email">
+                                             
 
-                                             <select class="form-select" aria-label="Default select example" name="banner_status" required>
+
+                                        </div>
+                                        <div class="mb-3">
+                                             <label for="team_position" class="form-label">Team Text</label>
+                                             <input type="text" class="form-control" id="team_position" aria-describedby="emailHelp" name="team_text" required>
+
+
+                                        </div>
+                                        
+                                        <div class="mb-3">
+
+                                             <select class="form-select" aria-label="Default select example" name="about_status" required>
                                                   <option selected>status</option>
                                                   <option value="1">show</option>
                                                   <option value="0">hide</option>
@@ -80,6 +93,7 @@ include "admin_sidebar.php";
                                              <input type="file" name="file" id="upload_file" required>
 
                                         </div>
+                                     
                                         <div class="form-group mb-3">
 
                                              <button type="submit" name="submit_banner" class="form-control btn btn-primary fw-bold" id="insert_banner">Submit</button>
@@ -163,7 +177,7 @@ include "admin_sidebar.php";
      function displaydata() {
           var displaydata = "true";
           $.ajax({
-               url: "banner_component.php",
+               url: "about_component.php",
                type: "post",
                data: {
                     displaysend: displaydata
@@ -186,7 +200,7 @@ include "admin_sidebar.php";
           var banner_id = banner_id;
           // console.log(banner_id);
           $.ajax({
-               url: "banner_component.php",
+               url: "about_component.php",
                type: "post",
                data: {
                     banner_id: banner_id,
@@ -210,7 +224,7 @@ include "admin_sidebar.php";
           var updatevalue_id = banner_id;
           console.log(updatevalue_id);
           $.ajax({
-               url: "banner_component.php",
+               url: "about_component.php",
                type: "post",
                data: {
                     updatevalue_id: updatevalue_id,
@@ -224,7 +238,7 @@ include "admin_sidebar.php";
                          e.preventDefault();
 
                          var formData1 = new FormData(this);
-                         echo($formData1);
+
                          submit_updatevalue(formData1);
                          $("#myModalvalues").hide();
                          showsuccess_message("success", "Bannerdata updated successfully");
@@ -237,21 +251,20 @@ include "admin_sidebar.php";
      }
 
      function submit_updatevalue(datas) {
-          
-          // console.log("yubraj");
-          echo("yubraj");
+
+
           console.log(datas);
           $.ajax({
-               url: "banner_component.php",
+               url: "about_component.php",
                type: "POST",
                data: datas,
                contentType: false,
                processData: false,
                success: function(data) {
-                    console.log("enter into the success fuction");
+                    //  if(data == "success"){
                     displaydata();
 
-                    console.log("showing display data");
+                    console.log(datas);
                     //  }
 
                }
@@ -265,7 +278,7 @@ include "admin_sidebar.php";
           var bannerid = bannerid;
           // console.log(bannerid);
           $.ajax({
-               url: "banner_component.php",
+               url: "about_component.php",
                type: "post",
                data: {
                     bannerid: bannerid,
@@ -308,7 +321,7 @@ include "admin_sidebar.php";
 
           console.log(data);
           $.ajax({
-               url: "banner_component.php",
+               url: "about_component.php",
                type: "POST",
                data: data,
                contentType: false,
@@ -349,7 +362,7 @@ include "admin_sidebar.php";
                     console.log(banner_id2);
                     
                     $.ajax({
-                         url: "banner_component.php",
+                         url: "about_component.php",
                          type: "post",
                          data: {
                               banner_id: banner_id2,
@@ -399,16 +412,16 @@ include "admin_sidebar.php";
 
                var formData = new FormData(this);
                formData.append('file', $('#upload_file')[0].files[0]);
-               // console.log(formData);
+                console.log(formData);
 
                $.ajax({
-                    url: "banner_component.php",
+                    url: "about_component.php",
                     type: "POST",
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                         // console.log(data);
+
                          displaydata();
                          $("#submit_form").trigger("reset");
                          if (data) {

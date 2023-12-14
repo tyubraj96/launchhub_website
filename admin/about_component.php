@@ -1,12 +1,16 @@
 <?php
 include "partials/connect.php";
 // print_r($_POST);
-if (isset($_POST["banner_insert"])) {
-	$status = $_POST["banner_status"];
-	$title =  $_POST["banner_title"];
-	$text =  $_POST["banner_text"];
-	$btn =  $_POST["banner_button"];
-	$btn_link =  $_POST["banner_button_link"];
+if (isset($_POST["about_insert"])) {
+	$status = $_POST["about_status"];
+	$heading =  $_POST["about_heading"];
+	$position =  $_POST["team_position"];
+         $name =  $_POST["team_name"];
+         $email =  $_POST["team_email"];
+	$abouttext =  $_POST["about_text"];
+         $text =  $_POST["team_text"];
+         $date = date("d/m/Y");
+         $time = date("h/i/sa");
 
 
 
@@ -47,7 +51,7 @@ if (isset($_POST["banner_insert"])) {
 	} else {
 		if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
 			// Insert data into the database
-			$sql = "INSERT INTO banner (banner_title, banner_status, image,banner_text,banner_button,banner_button_link) VALUES ('$title', '$status', '$filename','$text','$btn','$btn_link')";
+			$sql = "INSERT INTO about (about_heading, about_text, team_image, team_position, team_name, team_email ,team_text,team_status,date,time) VALUES ('$heading', '$abouttext', '$filename','$position', '$name', '$email','$text','$status','$date','$time')";
 			echo "$sql";
 			if (mysqli_query($conn, $sql)) {
 				echo "success";

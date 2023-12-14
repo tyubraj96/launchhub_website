@@ -3,7 +3,7 @@
  if(isset($_POST['login_submit'])){
 
           $username =$_POST['login_username'];
-          $password =$_POST['login_password'];
+          $password =md5($_POST['login_password']);
           
           $sql="SELECT * from users where username='$username' and password='$password' ";
           

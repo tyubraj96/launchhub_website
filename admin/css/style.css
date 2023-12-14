@@ -1,0 +1,15 @@
+#success_message{
+         position: absolute;
+         top:20%;
+         right:20%;
+
+}
+#error_message{
+         position: absolute;
+         top:20%;
+         right:20%;
+}
+.banner_img{
+         width: 100px;
+         height: auto;
+}

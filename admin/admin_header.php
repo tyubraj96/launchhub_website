@@ -15,14 +15,14 @@ if (!isset($_SESSION['username'])) {
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
   <!-- Bootstrap JS and Popper.js -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+ 
 
 
 
-  <link rel="stylesheet" href="assets/css/shared/style.css">
+  <link rel="stylesheet" href="css/style.css">
 
   <link rel="stylesheet" href="assets/css/demo_1/style.css">
 
@@ -44,7 +44,7 @@ if (!isset($_SESSION['username'])) {
 
     </ul>
 
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ms-auto">
       <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
           Welcome <?php echo $_SESSION["username"]; ?>

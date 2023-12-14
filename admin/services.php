@@ -4,22 +4,25 @@ include "admin_header.php";
 include "admin_sidebar.php";
 ?>
 
+
 <div id="admin-content" style=" margin-top:66px; margin-left: 271px;">
      <div id="error_message"></div>
      <div id="success_message"></div>
      <div class="container">
           <div class="row">
                <div class="col-md-10">
-                    <h1 class="admin-heading text-center text-primary mt-1">Banner Setting</h1>
+                    <h1 class="admin-heading text-center text-primary mt-1">Service Setting</h1>
                </div>
                <div class="col-md-2 text-center fs-4 mt-2">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                         Add Banner
+                         Add service
                     </button>
 
                </div>
                <div class="col-lg-12">
-                    <div id="display_table"></div>
+                    <div id="display_table">
+
+				</div>
 
 
                </div>
@@ -31,7 +34,7 @@ include "admin_sidebar.php";
 
                               <!-- Modal Header -->
                               <div class="modal-header">
-                                   <h4 class="modal-title">Add banner</h4>
+                                   <h4 class="modal-title">Add service</h4>
                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                               </div>
 
@@ -40,33 +43,32 @@ include "admin_sidebar.php";
 
                                    <form id="submit_form" method="post" enctype="multipart/form-data">
                                         <div class="mb-3">
-                                             <label for="banner_title" class="form-label"> Banner Title</label>
-                                             <input type="text" class="form-control" id="banner_title" aria-describedby="emailHelp" name="banner_title" required>
+                                             <label for="banner_title" class="form-label"> Service heading Title</label>
+                                             <input type="text" class="form-control" id="serviceheading_title" aria-describedby="emailHelp" name="serviceheading_title" required>
+                                    
+                                    	</div>
+								<div class="form-group mb-3">
+                                             <label class="fw-bold">Service Image</label>
+                                             <input type="file" name="file" id="upload_file" required>
+
+                                        </div>
+                                        <div class="mb-3">
+                                             <label for="service_title" class="form-label"> Service Title</label>
+                                             <input type="text" class="form-control" id="service_title" aria-describedby="emailHelp" name="service_title" required>
 
 
                                         </div>
                                         <div class="mb-3">
-                                             <label for="banner_text" class="form-label"> Banner Text</label>
-                                             <input type="text" class="form-control" id="banner_text" aria-describedby="emailHelp" name="banner_text" required>
+                                             <label for="service_text" class="form-label">Service Text</label>
+                                             <input type="text" class="form-control" id="service_text" aria-describedby="emailHelp" name="service_text" required>
+									<input type="hidden" name="service_insert" required>
 
 
                                         </div>
-                                        <div class="mb-3">
-                                             <label for="banner_button" class="form-label">Banner Button</label>
-                                             <input type="text" class="form-control" id="banner_button" aria-describedby="emailHelp" name="banner_button" required>
-
-
-                                        </div>
-                                        <div class="mb-3">
-                                             <label for="banner_text" class="form-label">Banner Button link</label>
-                                             <input type="text" class="form-control" id="banner_button_link" aria-describedby="emailHelp" name="banner_button_link">
-                                             <input type="hidden" name="banner_insert" required>
-
-
-                                        </div>
+                                       
                                         <div class="mb-3">
 
-                                             <select class="form-select" aria-label="Default select example" name="banner_status" required>
+                                             <select class="form-select" aria-label="Default select example" name="service_status" required>
                                                   <option selected>status</option>
                                                   <option value="1">show</option>
                                                   <option value="0">hide</option>
@@ -75,11 +77,6 @@ include "admin_sidebar.php";
 
                                         </div>
 
-                                        <div class="form-group mb-3">
-                                             <label class="fw-bold">Select Image</label>
-                                             <input type="file" name="file" id="upload_file" required>
-
-                                        </div>
                                         <div class="form-group mb-3">
 
                                              <button type="submit" name="submit_banner" class="form-control btn btn-primary fw-bold" id="insert_banner">Submit</button>
@@ -95,13 +92,13 @@ include "admin_sidebar.php";
                </div>
 
                <div class="modal" id="myModalview">
-                    <div class="modal-dialog modal-lg" id="modal-dialog">
-                         <div class="modal-content modal-lg">
+                    <div class="modal-dialog" id="modal-dialog">
+                         <div class="modal-content">
                               <div class="modal-header">
                                    <h4 class="modal-title">View banner</h4>
                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                               </div>
-                              <div id="Ajaxdata" class="modal-body">
+                              <div id="Ajaxview" class="modal-body">
 
                               </div>
 
@@ -139,7 +136,7 @@ include "admin_sidebar.php";
                          </div>
                     </div>
                </div>
-               <div class="modal" id="Modal_status">
+               <!-- <div class="modal" id="Modal_status">
                     <div class="modal-dialog" id="modal-dialog">
                          <div class="modal-content">
                               <div class="modal-header">
@@ -153,7 +150,7 @@ include "admin_sidebar.php";
 
                          </div>
                     </div>
-               </div>
+               </div> -->
 
           </div>
      </div>
@@ -163,7 +160,7 @@ include "admin_sidebar.php";
      function displaydata() {
           var displaydata = "true";
           $.ajax({
-               url: "banner_component.php",
+               url: "service_component.php",
                type: "post",
                data: {
                     displaysend: displaydata
@@ -182,39 +179,39 @@ include "admin_sidebar.php";
           $("#" + modalId).hide();
      }
 
-     function viewbanner(banner_id) {
-          var banner_id = banner_id;
-          // console.log(banner_id);
+     function viewservice(service_id) {
+          var service_id = service_id;
+           console.log(service_id);
           $.ajax({
-               url: "banner_component.php",
+               url: "service_component.php",
                type: "post",
                data: {
-                    banner_id: banner_id,
-                    action: "ViewData",
-                    form_mode: "view"
+                    service_id: service_id,
+                    action: "ViewServices",
+                    // form_mode: "view"
                },
                success: function(data, status) {
 
-                    $('.modal-content #Ajaxdata').html(data);
-                    $('input[name="form_mode"]').val('view');
+                    $("#Ajaxview").html(data);
+                    // $('input[name="form_mode"]').val('view');
                     $('#myModalview').modal('show');
-                    // console.log(status);
+                     console.log(status);
                }
 
 
           });
      }
 
-     function updatevalue(banner_id) {
+     function updateServicevalue(service_id) {
 
-          var updatevalue_id = banner_id;
-          console.log(updatevalue_id);
+          var service_id = service_id;
+          console.log(service_id);
           $.ajax({
-               url: "banner_component.php",
+               url: "service_component.php",
                type: "post",
                data: {
-                    updatevalue_id: updatevalue_id,
-                    action: "updatebannervalue"
+                    service_id: service_id,
+                    action: "updateServicevalue"
                },
                success: function(data, status) {
                     $('.modal-content #ajaxmodal_value').html(data);
@@ -224,9 +221,9 @@ include "admin_sidebar.php";
                          e.preventDefault();
 
                          var formData1 = new FormData(this);
-                         echo($formData1);
+
                          submit_updatevalue(formData1);
-                         $("#myModalvalues").hide();
+                        
                          showsuccess_message("success", "Bannerdata updated successfully");
                     });
                }
@@ -237,39 +234,39 @@ include "admin_sidebar.php";
      }
 
      function submit_updatevalue(datas) {
-          
-          // console.log("yubraj");
-          echo("yubraj");
+
+
           console.log(datas);
           $.ajax({
-               url: "banner_component.php",
+               url: "service_component.php",
                type: "POST",
                data: datas,
                contentType: false,
                processData: false,
                success: function(data) {
-                    console.log("enter into the success fuction");
+                      if(data == "success"){
                     displaydata();
 
-                    console.log("showing display data");
-                    //  }
+                    console.log(datas);
+                     }
 
                }
 
 
           });
+		return "success";
 
      }
 
-     function viewimagebanner(bannerid) {
-          var bannerid = bannerid;
+     function viewServicesbanner(serviceid) {
+          var serviceid = serviceid;
           // console.log(bannerid);
           $.ajax({
-               url: "banner_component.php",
+               url: "service_component.php",
                type: "post",
                data: {
-                    bannerid: bannerid,
-                    action: "updatebanner"
+                    serviceid: serviceid,
+                    action: "viewService"
                },
                success: function(data, status) {
 
@@ -293,7 +290,11 @@ include "admin_sidebar.php";
                          // console.log(formData2);
 
                          update_submitbanner(formData2);
-                        
+                         
+                              
+						
+                              $("#Modal_imagebanner").hide();
+                              showsuccess_message("success", "Bannerimage updated successfully");
                          
 
                     });
@@ -308,22 +309,16 @@ include "admin_sidebar.php";
 
           console.log(data);
           $.ajax({
-               url: "banner_component.php",
+               url: "service_component.php",
                type: "POST",
                data: data,
                contentType: false,
                processData: false,
                success: function(data) {
                     if (data === "success") {
-                         displaydata();
-                         $("#Modal_imagebanner").hide();
-                         
-                         showsuccess_message("success", "Bannerimage updated successfully");
-                         showerror_message("failure", "Your image cant be updated");
-                         
-                         
-                    } 
-                    else if (data === "failure") {
+					displaydata();
+
+                    } else if (data === "failure") {
                          showerror_message("failure", "Your image cant be updated");
                     }
 
@@ -334,52 +329,43 @@ include "admin_sidebar.php";
      }
 
      function ViewStatus(banner_id) {
-          var banner_id2 = banner_id;
-          Swal.fire({
-               title: "Do you want to save the changes?",
-               showDenyButton: true,
-               showCancelButton: true,
-               confirmButtonText: "Save",
-               denyButtonText: `Don't save`
-          }).then((result) => {
-               /* Read more about isConfirmed, isDenied below */
-               if (result.isConfirmed) {
-
-                   
-                    console.log(banner_id2);
+          var banner_id = banner_id;
+          console.log(banner_id);
+          confirm_alert();
+          $.ajax({
+               url: "service_component.php",
+               type: "post",
+               data: {
+                    banner_id: banner_id,
+                    action: "ViewStatus",
+                    // form_mode: "view"
+               },
+               success: function(data, status) {
                     
-                    $.ajax({
-                         url: "banner_component.php",
-                         type: "post",
-                         data: {
-                              banner_id: banner_id2,
-                              action: "ViewStatus",
-                              // form_mode: "view"
-                         },
-                         success: function(data, status) {
-                              
-                              if (data == "success") {
-                                   Swal.fire("Saved!", "", "success");
-                                   displaydata();
-                                  // confirm_alert("Saved!", "", "success");
-                              } else {
-                                   confirm_alert("Saved!", "", "success");
-                              }
+                    if (data == "success") {
+                         displaydata();
+                         confirm_alert("Saved!", "", "success");
+                    } else {
+                         confirm_alert("Saved!", "", "success");
+                    }
 
-                         
+                    // $('.modal-content #modal_status_update').html(data);
 
-                         }
+                    // $('#Modal_status').modal('show');
+                    // $("#submit_status").on("submit", function(e) {
+                    //      e.preventDefault();
 
+                    //      var formData3 = new FormData(this);
+                    //      // console.log(formData2);
 
-                    });
+                    //      update_status(formData3);
+                    //      $('#Modal_imagebanner').hide();
+                    // });
 
-
-                    
-               } else if (result.isDenied) {
-                    Swal.fire("Changes are not saved", "", "info");
                }
+
+
           });
-         
      }
 
      function update_status(data) {
@@ -399,16 +385,16 @@ include "admin_sidebar.php";
 
                var formData = new FormData(this);
                formData.append('file', $('#upload_file')[0].files[0]);
-               // console.log(formData);
+               console.log(formData);
 
                $.ajax({
-                    url: "banner_component.php",
+                    url: "service_component.php",
                     type: "POST",
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function(data) {
-                         // console.log(data);
+
                          displaydata();
                          $("#submit_form").trigger("reset");
                          if (data) {
@@ -454,6 +440,19 @@ include "admin_sidebar.php";
      }
 
      function confirm_alert() {
-         
+          Swal.fire({
+               title: "Do you want to save the changes?",
+               showDenyButton: true,
+               showCancelButton: true,
+               confirmButtonText: "Save",
+               denyButtonText: `Don't save`
+          }).then((result) => {
+               /* Read more about isConfirmed, isDenied below */
+               if (result.isConfirmed) {
+                    Swal.fire("Saved!", "", "success");
+               } else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+               }
+          });
      }
 </script>

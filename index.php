@@ -14,56 +14,75 @@
 <body class="">
     <?php
     include "header.php";
-    ?>
-
+    $sql = "SELECT * FROM banner WHERE banner_status = 1";
+            $result = mysqli_query($conn, $sql);
+            $num_rows = mysqli_num_rows($result);
+            ?>
+`
 
     <section id="carouselsection">
 
         <div id="carousel" class="carousel slide  overflow-hidden">
+            <?php
+      
+      for ($i = 0; $i < $num_rows; $i++) {
+          $activeClass = ($i === 0) ? 'active' : '';
+          echo '<button type="button" data-bs-target="#carousel" data-bs-slide-to="' . $i . '" class="' . $activeClass . '" aria-label="Slide ' . ($i + 1) . '"></button>';
+      }
+      ?>
+            ?>
+            <!-- <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" id="carousel-button-0" class="active" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="<?php $i ?> . ($i === 0 ? 'class="active" ' : '') . 'aria-label="Slide ' . ($i + 1) . '"></button>
             <div class="carousel-indicators" id="carousel-indicators">
-                <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carousel" data-bs-slide-to="3" aria-label="Slide 3"></button>
+                 -->
             </div>
             <div class="carousel-inner position-relative" id="carousel-inner">
-                <div class="carousel-item active" id="carousel-item">
-                    <img src="images/bag.avif" class="d-block w-100 image1" alt="...">
+                <?php $active = true;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                <!-- <div class="carousel-item <?php  echo $active ? 'active' : '' ?> "id="carousel-item"> -->
+                <div class="carousel-item <?php echo $active ? 'active' : ''; ?>" id="carousel-item">
+                    <img src="images/ <?php  echo $row['image'] ?>" class="d-block w-100 image1" alt="...">
                     <div class="carousel-caption  " id="carousel-caption">
                         <div class="d-flex  flex-column ">
-                            <h2 class="fw-bold display-5">GOOD DESIGN IS A GOOD BUSINESS</h2>
-                            <p class="mt-3 mb-5">Some representative placeholder content for the first slide.</p>
+                            <h2 class="fw-bold display-5"><?php echo $row['banner_title']; ?></h2>
+                            <p class="mt-3 mb-5"><?php echo $row['banner_text']; ?></p>
                             <!-- <p><a href="#" class="btn btn-warning btn-lg mt-3">Learn More</a></p> -->
-                            <button type="button" class="btn btn-warning d-block m-auto fw-semibold text-white" style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 2rem; width: 300px;">
-                                Learn More
-                            </button>
+                            <a href="<?php echo $row['banner_button_link']; ?>" type="button" class="btn btn-warning d-block m-auto fw-semibold text-white" style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 2rem; width: 300px;">
+                            <?php echo $row['banner_button']; ?>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item position relative" id="carousel-item">
+                <?php
+        $active = false; // Set $active to false for subsequent items
+    }
+               
+                ?>
+                <!-- <div class="carousel-item position relative" id="carousel-item">
                     <img src="images/bag2.avif" class="d-block w-100 image" alt="...">
                     <div class="carousel-caption">
                         <h2 class="fw-bold display-5">Second slide label</h2>
                         <p class="mt-3 "> Some representative placeholder content for the second slide.</p>
                         <p><a href="#" class="btn btn-warning btn-lg mt-3">Learn More</a></p>
                     </div>
-                </div>
-                <div class="carousel-item position relative" id="carousel-item1">
+                </div> -->
+                <!-- <div class="carousel-item position relative" id="carousel-item1">
                     <img src="images/bag3.avif" class="d-block w-100 image" alt="...">
                     <div class="carousel-caption  ">
                         <h2 class="fw-bold display-5">Third slide label</h2>
                         <p class="mt-3 ">Some representative placeholder content for the third slide.</p>
                         <p class="m-auto"><a href="#" class="btn btn-warning btn-lg mt-3">Learn More</a></p>
-                    </div>
-                </div>
-                <div class="carousel-item position relative" id="carousel-item">
+                    </div> 
+                </div> -->
+                <!-- <div class="carousel-item position relative" id="carousel-item">
                     <img src="images/bag4.avif" class="d-block w-100 image" alt="...">
                     <div class="carousel-caption  ">
                         <h2 class="fw-bold display-5">Fourth slide label</h2>
                         <p class="mt-3 ">Some representative placeholder content for the third slide.</p>
                         <p class="m-auto"><a href="#" class="btn btn-warning btn-lg mt-3">Learn More</a></p>
                     </div>
-                </div>
+                </div> -->
             </div>
 
         </div>

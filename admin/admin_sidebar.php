@@ -20,19 +20,14 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="portfolio.php">
                 <i class="menu-icon typcn typcn-document-text"></i>
                 <span class="menu-title">Portfolio</span>
               </a>
             </li>
              
             
-            <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
-                <i class="menu-icon typcn typcn-shopping-bag"></i>
-                <span class="menu-title">About</span>
-              </a>
-            </li>
+          
             <li class="nav-item">
               <a class="nav-link" href="pages/charts/chartjs.html">
                 <i class="menu-icon typcn typcn-th-large-outline"></i>
@@ -40,7 +35,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/contact.php">
+              <a class="nav-link" href="Sidesetting.php">
                 <i class="menu-icon typcn typcn-bell"></i>
                 <span class="menu-title">Side setting</span>
               </a>
@@ -52,13 +47,19 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="team.php">
+                <i class="menu-icon typcn typcn-user-outline"></i>
+                <span class="menu-title">Team</span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="banner.php">
                 <i class="menu-icon typcn typcn-user-outline"></i>
                 <span class="menu-title">Banner setting</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/icons/font-awesome.html">
+              <a class="nav-link" href="testimonial.php">
                 <i class="menu-icon typcn typcn-user-outline"></i>
                 <span class="menu-title">Testimonials setting</span>
               </a>
@@ -76,7 +77,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/icons/font-awesome.html">
+              <a class="nav-link" href="clients.php">
                 <i class="menu-icon typcn typcn-user-outline"></i>
                 <span class="menu-title">Clients</span>
               </a>

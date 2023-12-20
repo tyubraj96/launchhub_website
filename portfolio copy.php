@@ -72,7 +72,7 @@
                                                 <div class="card-body">
                                                       <h5 class="card-title fw-bold"><?php echo $row['portfolio_title']; ?></h5>
                                                       <p class="card-text"><?php echo $row['portfolio_text']; ?></p>
-                                                      <a href="singleportfolio.php?portfolio_id=<?php echo $row['portfolio_id']; ?>" class="btn btn-primary"><?php echo $row['portfolio_button_text']; ?></a>
+                                                      <a href="singleportfolio.php" class="btn btn-primary"><?php echo $row['portfolio_button_text']; ?></a>
                                                 </div>
                                           </div>
                                           <!-- <img src="" alt="" class="img-fluid w-100"> -->
@@ -92,22 +92,25 @@
                         <div class="row text-center">
                               <h3 class="text-primary fw-bolder mb-4">CLIENTS</h3>
                         </div>
-                        <?php
-                        $sql = "SELECT * from clients WHERE client_status = 1";
-                        $result = mysqli_query($conn, $sql);
-                        if (mysqli_num_rows($result) > 0) {
-                              while ($row = mysqli_fetch_assoc($result)) {
-
-                        
-                        ?>
                         <div class="row mb-4">
-                              <div class="col-lg-2 d-flex">
-                                    <img src="admin/clientimages/<?php echo $row['client_image'];?>" alt="" class="img-fluid w-100">
+                              <div class="col-lg-2">
+                                    <img src="images/google.jpeg" alt="" class="img-fluid w-100">
                               </div>
-                           <?php
-                              }
-                        }
-                        ?>
+                              <div class="col-lg-2 ">
+                                    <img src="images/coke.png" alt="" class="img-fluid w-100">
+                              </div>
+                              <div class="col-lg-2">
+                                    <img src="images/microsoft.png" alt="" class="img-fluid w-100">
+                              </div>
+                              <div class="col-lg-2">
+                                    <img src="images/toyota.jpeg" alt="" class="img-fluid w-100">
+                              </div>
+                              <div class="col-lg-2">
+                                    <img src="images/amazon.png" alt="" class="img-fluid w-100">
+                              </div>
+                              <div class="col-lg-2">
+                                    <img src="images/images.jpeg" alt="" class="img-fluid w-100">
+                              </div>
                         </div>
                   </div>
             </div>

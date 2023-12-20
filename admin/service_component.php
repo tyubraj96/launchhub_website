@@ -281,7 +281,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'viewService') {
 <?php
 } else if (isset($_POST["insert_updateimage"])) {
 	$id = $_POST['id'];
-	$target_dir = "images/";
+	$target_dir = "serviceimages/";
 	$target_file = $target_dir . basename($_FILES["file"]["name"]);
 	$uploadOk = 1;
 	// $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -320,11 +320,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'viewService') {
 			// update data into the database
 			$sql = "UPDATE  services SET  service_image = '$filename' WHERE service_id = $id ";
 			echo $sql;
-			if (mysqli_query($conn, $sql)) {
-				echo "success";
-			} else {
-				echo "failure";
-			}
+			mysqli_query($conn, $sql);
+			
 		} else {
 			echo "failure";
 		}

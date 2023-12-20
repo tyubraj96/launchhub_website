@@ -324,18 +324,17 @@ if (isset($_POST['action']) && $_POST['action'] == 'updatebanner') {
 
 	if ($uploadOk == 0) {
 		echo "failure";
-		die();
+		
 	} else {
 		if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
 			// update data into the database
 			$sql = "UPDATE  banner SET  image = '$filename' WHERE banner_id = $id ";
 			echo "$sql";
-			if (mysqli_query($conn, $sql)) {
-				echo "success";
-			} else {
-				echo "failure";
-			}
-		} else {
+			mysqli_query($conn, $sql);
+			
+			
+		}
+		else{
 			echo "failure";
 		}
 	}

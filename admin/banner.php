@@ -239,7 +239,7 @@ include "admin_sidebar.php";
      function submit_updatevalue(datas) {
           
           // console.log("yubraj");
-          echo("yubraj");
+          
           console.log(datas);
           $.ajax({
                url: "banner_component.php",
@@ -248,7 +248,7 @@ include "admin_sidebar.php";
                contentType: false,
                processData: false,
                success: function(data) {
-                    console.log("enter into the success fuction");
+                    
                     displaydata();
 
                     console.log("showing display data");
@@ -314,17 +314,19 @@ include "admin_sidebar.php";
                contentType: false,
                processData: false,
                success: function(data) {
-                    if (data === "success") {
+                    if (data == "failure") {
+                         showerror_message("failure", "Your image cant be updated");
+                        
+                         
+                    } 
+                    else {
                          displaydata();
                          $("#Modal_imagebanner").hide();
                          
                          showsuccess_message("success", "Bannerimage updated successfully");
-                         showerror_message("failure", "Your image cant be updated");
                          
                          
-                    } 
-                    else if (data === "failure") {
-                         showerror_message("failure", "Your image cant be updated");
+                        
                     }
 
                }

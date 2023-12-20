@@ -5,15 +5,15 @@ include "admin_sidebar.php";
 ?>
 
 <div id="admin-content" style=" margin-top:66px; margin-left: 271px;">
-    
+
      <div class="container">
           <div class="row">
                <div class="col-md-10">
-                    <h1 class="admin-heading text-center text-primary mt-1">Banner Setting</h1>
+                    <h1 class="admin-heading text-center text-primary mt-1">Clients Setting</h1>
                </div>
                <div class="col-md-2 text-center fs-4 mt-2">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                         Add Banner
+                         Add Clients
                     </button>
 
                </div>
@@ -30,7 +30,7 @@ include "admin_sidebar.php";
 
                               <!-- Modal Header -->
                               <div class="modal-header">
-                                   <h4 class="modal-title">Add banner</h4>
+                                   <h4 class="modal-title">Add Clients</h4>
                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                               </div>
 
@@ -38,48 +38,20 @@ include "admin_sidebar.php";
                               <div class="modal-body">
 
                                    <form id="submit_form" method="post" enctype="multipart/form-data">
-                                        <div class="mb-3">
-                                             <label for="about_heading" class="form-label"> About Heading</label>
-                                             <input type="text" class="form-control" id="about_heading" aria-describedby="emailHelp" name="about_heading" required>
 
+                                        <div class="mb-3">
+                                             <label for="team_position" class="form-label">Client link</label>
+                                             <input type="text" class="form-control" id="team_position" aria-describedby="emailHelp" name="client_link" required>
+                                             <input type="hidden" name="client_insert" required>
 
                                         </div>
-                                        <div class="mb-3">
-                                             <label for="about_text" class="form-label"> About Text</label>
-                                             <input type="text" class="form-control" id="about_text" aria-describedby="emailHelp" name="about_text" required>
-
-
-                                        </div>
-                                        <div class="mb-3">
-                                             <label for="team_position" class="form-label">Team position</label>
-                                             <input type="text" class="form-control" id="team_position" aria-describedby="emailHelp" name="team_position" required>
-
-
-                                        </div>
-                                        <div class="mb-3">
-                                             <label for="team_name" class="form-label">Team name</label>
-                                             <input type="text" class="form-control" id="team_name" aria-describedby="emailHelp" name="team_name">
-                                             <input type="hidden" name="about_insert" required>
-
-
-                                        </div>
-                                        <div class="mb-3">
-                                             <label for="team_name" class="form-label">Team email</label>
-                                             <input type="text" class="form-control" id="team_name" aria-describedby="emailHelp" name="team_email">
-                                             
-
-
-                                        </div>
-                                        <div class="mb-3">
-                                             <label for="team_position" class="form-label">Team Text</label>
-                                             <input type="text" class="form-control" id="team_position" aria-describedby="emailHelp" name="team_text" required>
-
-
-                                        </div>
+                                       
                                         
+                                        
+
                                         <div class="mb-3">
 
-                                             <select class="form-select" aria-label="Default select example" name="about_status" required>
+                                             <select class="form-select" aria-label="Default select example" name="client_status" required>
                                                   <option selected>status</option>
                                                   <option value="1">show</option>
                                                   <option value="0">hide</option>
@@ -93,7 +65,7 @@ include "admin_sidebar.php";
                                              <input type="file" name="file" id="upload_file" required>
 
                                         </div>
-                                     
+
                                         <div class="form-group mb-3">
 
                                              <button type="submit" name="submit_banner" class="form-control btn btn-primary fw-bold" id="insert_banner">Submit</button>
@@ -112,7 +84,7 @@ include "admin_sidebar.php";
                     <div class="modal-dialog modal-lg" id="modal-dialog">
                          <div class="modal-content modal-lg">
                               <div class="modal-header">
-                                   <h4 class="modal-title">View banner</h4>
+                                   <h4 class="modal-title">View clients</h4>
                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                               </div>
                               <div id="Ajaxdata" class="modal-body">
@@ -123,7 +95,7 @@ include "admin_sidebar.php";
                          </div>
                     </div>
                </div>
-               <div class="modal" id="myModalvalues">
+                <div class="modal" id="myModalvalues">
                     <div class="modal-dialog" id="modal_values">
                          <div class="modal-content">
                               <div class="modal-header">
@@ -174,10 +146,10 @@ include "admin_sidebar.php";
 </div>
 <?php include "scripts.php"; ?>
 <script>
-     function displaydata() {
+     function loadtable() {
           var displaydata = "true";
           $.ajax({
-               url: "about_component.php",
+               url: "clients_component.php",
                type: "post",
                data: {
                     displaysend: displaydata
@@ -192,19 +164,25 @@ include "admin_sidebar.php";
           });
      }
 
+     $(document).ready(function() {
+
+          loadtable();
+
+     });
+
      function closeModal(modalId) {
           $("#" + modalId).hide();
      }
 
-     function viewbanner(banner_id) {
-          var banner_id = banner_id;
-          // console.log(banner_id);
+     function viewclients(client_id) {
+          varclient_id = client_id;
+           console.log(client_id);
           $.ajax({
-               url: "about_component.php",
+               url: "clients_component.php",
                type: "post",
                data: {
-                    banner_id: banner_id,
-                    action: "ViewData",
+                  client_id: client_id,
+                    action: "Viewclients",
                     form_mode: "view"
                },
                success: function(data, status) {
@@ -219,16 +197,16 @@ include "admin_sidebar.php";
           });
      }
 
-     function updatevalue(banner_id) {
+     function updateClientvalue(client_id) {
 
-          var updatevalue_id = banner_id;
-          console.log(updatevalue_id);
+          var client_id = client_id;
+          console.log(client_id);
           $.ajax({
-               url: "about_component.php",
+               url: "clients_component.php",
                type: "post",
                data: {
-                    updatevalue_id: updatevalue_id,
-                    action: "updatebannervalue"
+                  client_id: client_id,
+                    action: "updateClientsvalue"
                },
                success: function(data, status) {
                     $('.modal-content #ajaxmodal_value').html(data);
@@ -255,16 +233,16 @@ include "admin_sidebar.php";
 
           console.log(datas);
           $.ajax({
-               url: "about_component.php",
+               url: "clients_component.php",
                type: "POST",
                data: datas,
                contentType: false,
                processData: false,
                success: function(data) {
                     //  if(data == "success"){
-                    displaydata();
+                    loadtable();
 
-                    console.log(datas);
+                    // console.log(datas);
                     //  }
 
                }
@@ -274,40 +252,34 @@ include "admin_sidebar.php";
 
      }
 
-     function viewimagebanner(bannerid) {
-          var bannerid = bannerid;
+     function viewClientbanner(client_id) {
+          var client_id = client_id;
           // console.log(bannerid);
           $.ajax({
-               url: "about_component.php",
+               url: "clients_component.php",
                type: "post",
                data: {
-                    bannerid: bannerid,
-                    action: "updatebanner"
+                    client_id: client_id,
+                    action: "viewClientbanner"
                },
                success: function(data, status) {
 
 
-                    displaydata();
+                    // loadtable();
                     $('.modal-content #modal_image').html(data);
                     $('#Modal_imagebanner').show();
 
                     console.log(status);
-                    //      $("#submit_form_").on("submit", function(e) {
-                    //           e.preventDefault();
-
-                    //           var formData1 = new FormData(this);
-
-                    //           submit_updatevalue(formData1);
-                    //     });
+               
                     $("#form_imagesubmit").on("submit", function(e) {
                          e.preventDefault();
 
                          var formData2 = new FormData(this);
-                         // console.log(formData2);
-
-                         update_submitbanner(formData2);
-                        
                          
+
+                         update_submit_portfoliobanner(formData2);
+
+
 
                     });
                }
@@ -317,37 +289,38 @@ include "admin_sidebar.php";
 
      }
 
-     function update_submitbanner(data) {
+     function  update_submit_portfoliobanner(data) {
 
           console.log(data);
           $.ajax({
-               url: "about_component.php",
+               url: "clients_component.php",
                type: "POST",
                data: data,
                contentType: false,
                processData: false,
                success: function(data) {
-                    if (data === "success") {
-                         displaydata();
+                    if (data == "failure") {
+                         showerror_message("failure", "Your image cant be updated");
+                        
+                         
+                    } 
+                    else {
+                         loadtable();
                          $("#Modal_imagebanner").hide();
                          
                          showsuccess_message("success", "Bannerimage updated successfully");
-                         showerror_message("failure", "Your image cant be updated");
                          
                          
-                    } 
-                    else if (data === "failure") {
-                         showerror_message("failure", "Your image cant be updated");
+                        
                     }
-
                }
 
 
           });
      }
 
-     function ViewStatus(banner_id) {
-          var banner_id2 = banner_id;
+     function ViewStatus(clientid) {
+          var clientid = clientid;
           Swal.fire({
                title: "Do you want to save the changes?",
                showDenyButton: true,
@@ -358,28 +331,28 @@ include "admin_sidebar.php";
                /* Read more about isConfirmed, isDenied below */
                if (result.isConfirmed) {
 
-                   
-                    console.log(banner_id2);
-                    
+
+                    console.log(clientid);
+
                     $.ajax({
-                         url: "about_component.php",
+                         url: "clients_component.php",
                          type: "post",
                          data: {
-                              banner_id: banner_id2,
+                           clientid: clientid,
                               action: "ViewStatus",
                               // form_mode: "view"
                          },
                          success: function(data, status) {
-                              
+
                               if (data == "success") {
                                    Swal.fire("Saved!", "", "success");
-                                   displaydata();
-                                  // confirm_alert("Saved!", "", "success");
+                                   loadtable();
+                                   // confirm_alert("Saved!", "", "success");
                               } else {
                                    confirm_alert("Saved!", "", "success");
                               }
 
-                         
+
 
                          }
 
@@ -387,12 +360,12 @@ include "admin_sidebar.php";
                     });
 
 
-                    
+
                } else if (result.isDenied) {
                     Swal.fire("Changes are not saved", "", "info");
                }
           });
-         
+
      }
 
      function update_status(data) {
@@ -400,11 +373,11 @@ include "admin_sidebar.php";
 
      }
 
-     $(document).ready(function() {
+     // $(document).ready(function() {
 
-          displaydata();
+     //      displaydata();
 
-     });
+     // });
 
      $(document).ready(function() {
           $("#submit_form").on("submit", function(e) {
@@ -412,20 +385,20 @@ include "admin_sidebar.php";
 
                var formData = new FormData(this);
                formData.append('file', $('#upload_file')[0].files[0]);
-                console.log(formData);
+               console.log(formData);
 
                $.ajax({
-                    url: "about_component.php",
+                    url: "clients_component.php",
                     type: "POST",
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function(data) {
 
-                         displaydata();
-                         $("#submit_form").trigger("reset");
+                         // loadtable();
+                         // $("#submit_form").trigger("reset");
                          if (data) {
-                              displaydata();
+                              loadtable();
                               $("#myModal").modal("hide");
 
                               showsuccess_message("success", "data inserted successfully");
@@ -467,6 +440,6 @@ include "admin_sidebar.php";
      }
 
      function confirm_alert() {
-         
+
      }
 </script>
